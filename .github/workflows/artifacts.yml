@@ -6,12 +6,13 @@ jobs:
     steps:
       - name: Create file
         run: touch test.txt
-      - name: Add content
-        run: echo 'Some text' > test.txt
       - name: Check if file is present
         run: ls
+      - name: Add content
+        run: echo 'Some text' > test.txt
+      - name: Output content
+        run: cat test.txt
       - name: Upload file
-        run: ls
         uses: actions/upload-artifact@v3
         with:
           name: test_file
@@ -24,4 +25,6 @@ jobs:
         with:
           name: test_file
       - name: Output content
-        run: cat test.txt
+        run: |
+          echo 'in download_ file job: '
+          cat test.txt
