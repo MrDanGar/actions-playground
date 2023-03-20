@@ -4,21 +4,20 @@ jobs:
   create_output:
     runs-on: ubuntu-latest
     outputs:
-      output_1: ${{ steps.create_op1.outputs.op1 }}
-      output_2: ${{ steps.create_op2.outputs.op2 }}
+      output_one: ${{ steps.create_output_one.outputs.step_output_one }}
+      output_two: ${{ steps.create_output_two.outputs.step_output_two}}
     steps:
-      - name: Create output op1
-        id: create_op1
-        run: echo "op1=Hello world" >> $GITHUB_OUTPUT
-      - name: Create output op2
-        id: create_op2
-        run: echo "op2=This is some output" >> $GITHUB_OUTPUT
+      - name: Create output one
+        id: create_output_one
+        run: echo "step_output_one=Hello world" >> $GITHUB_OUTPUT
+      - name: Create output two
+        id: create_output_two
+        run: echo "step_output_two=This is some output" >> $GITHUB_OUTPUT
   use_output:
     needs: create_output
     runs-on: ubuntu-latest
     steps:
-      - name: Use and print output 1
-        run: echo "${{ needs.create_output.outputs.output_1 }}"
-      - name: Use and print output 2
-        run: echo "${{ needs.create_output.outputs.output_2 }}"
-
+      - name: Use and print output one
+        run: echo "${{ needs.create_output.outputs.output_one }}"
+      - name: Use and print output two
+        run: echo "${{ needs.create_output.outputs.output_two }}"
