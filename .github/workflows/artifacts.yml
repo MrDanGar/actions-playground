@@ -19,6 +19,7 @@ jobs:
           path: ./
   download_file:
     runs-on: ubuntu-latest
+    needs: create_and_upload_file
     steps:
       - name: Download file
         uses: actions/download-artifact@v3

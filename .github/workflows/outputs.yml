@@ -1,0 +1,24 @@
+name: Outputs
+on: push
+jobs:
+  create_output:
+    runs-on: ubuntu-latest
+    outputs:
+      output_1: ${{ steps.create_op1.outputs.op1 }}
+      output_2: ${{ steps.create_op2.outputs.op2 }}
+    steps:
+      - name: Create output op1
+        id: create_op1
+        run: echo "op1=Hello world" >> $GITHUB_OUTPUT
+      - name: Create output op2
+        id: create_op2
+        run: echo "op2=This is some output" >> $GITHUB_OUTPUT
+  use_output:
+    needs: create_output
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use and print output 1
+        run: echo "${{ needs.outputs.output_1 }}"
+      - name: Use and print output 2
+        run: echo "${{ needs.outputs.output_2 }}"
+
