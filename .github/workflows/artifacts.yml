@@ -9,7 +9,7 @@ jobs:
       - name: Check if file is present
         run: ls
   upload_file:
-    depends-on: create_file
+    needs: create_file
     runs-on: ubuntu-latest
     steps:
       - name: Upload file
