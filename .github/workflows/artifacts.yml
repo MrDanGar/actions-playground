@@ -1,0 +1,21 @@
+name: Artifacts example
+on: push
+jobs:
+  create_file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create file
+        run: touch test.txt
+      - name: Check if file is present
+        run: ls
+  upload_file:
+    depends-on: create_file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload file
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_file
+          path: 
+      -
+      
