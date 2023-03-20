@@ -1,21 +1,27 @@
 name: Artifacts example
 on: push
 jobs:
-  create_file:
+  create_and_upload_file:
     runs-on: ubuntu-latest
     steps:
       - name: Create file
         run: touch test.txt
+      - name: Add content
+        run: echo 'Some text' > test.txt
       - name: Check if file is present
         run: ls
-  upload_file:
-    needs: create_file
-    runs-on: ubuntu-latest
-    steps:
       - name: Upload file
         run: ls
-        #uses: actions/upload-artifact@v3
-        #with:
-        #  name: test_file
-        #  path: 
-      
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_file
+          path: ./
+  download_file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download file
+        uses: actions/download-artifact@v3
+        with:
+          name: test_file
+      - name: Output content
+        run: cat test.txt
