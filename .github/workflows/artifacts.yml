@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Upload file
+        run: ls
         #uses: actions/upload-artifact@v3
         #with:
         #  name: test_file
