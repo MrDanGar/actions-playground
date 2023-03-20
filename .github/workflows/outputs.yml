@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Use and print output 1
-        run: echo "${{ needs.outputs.output_1 }}"
+        run: echo "${{ needs.create_output.outputs.output_1 }}"
       - name: Use and print output 2
-        run: echo "${{ needs.outputs.output_2 }}"
+        run: echo "${{ needs.create_output.outputs.output_2 }}"
 
