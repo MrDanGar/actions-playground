@@ -19,7 +19,7 @@ jobs:
     needs: job_one
     steps:
       - name: test
-        run: echo "toJSON(${{ needs.job_one }})"
+        run: echo "toJSON(needs.job_one)"
       - name: Cleanup failure
         if: ${{ needs.job_one.steps.critical_step_id.conclusion == 'failure' }}
         run: echo "The other job failed"
