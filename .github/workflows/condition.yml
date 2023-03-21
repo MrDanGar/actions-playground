@@ -4,31 +4,26 @@ jobs:
   job_one:
     runs-on: ubuntu-latest
     continue-on-error: true
+    id: job_one
     steps:
-      - name: Failing step
-        id: failing_step_id
+      - name: Critical step
+        id: critical_step_id
         run: exit 1
       - name: On failure step
-        if: ${{ failure() && steps.failing_step_id.conclusion == 'failure' }}
+        if: ${{ failure() && steps.critical_step_id.conclusion == 'failure' }}
         run: echo "ERROR"
       - name: On success step
-        if: ${{ failure() && steps.failing_step_id.conclusion == 'failure' }}
+        if: ${{ success() && steps.critical_step_id.conclusion == 'success' }}
         run: echo "SUCCESS"
-  job_failure:
-    if: ${{ failure() }} 
+  job_cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: Failure
-        run: echo "A previous job has faild"
-  job_sucess:
-    if: ${{ success() }} 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Success
-        run: echo "All previous jobs have suceeded"
-  job_always:
-    if: ${{ always() }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Always
-        run: echo "This is always printed"
+      - name: Cleanup failure
+        if: ${{ jobs.job_one.steps.critical_step_id.conclusion == 'failure' }}
+        run: echo "The other job failed"
+      - name: Cleanup success
+        if: ${{ jobs.job_one.steps.critical_step_id.conclusion == 'success' }}
+        run: echo "The other job suceeded"
+      - name: Clenaup always
+        if: ${{ always }}
+        run: echo "This is always echoed"
