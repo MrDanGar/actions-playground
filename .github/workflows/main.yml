@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Output
-        run: echo "${{ needs.Call-workflow.outputs }}"
+        run: echo "${{ needs.Call-workflow.outputs.some_output }}"
