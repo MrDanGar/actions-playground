@@ -23,4 +23,4 @@ jobs:
     #if: github.repository == "actions-playground/master"
     steps:
       - name:
-        echo: "${{ toJSON(github) }}"
+        run: echo "${{ toJSON(github) }}"
