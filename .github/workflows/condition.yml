@@ -20,7 +20,7 @@ jobs:
         run: echo "ALWAYS"
   job_two:
     runs-on: ubuntu-latest
-    #if: github.repository == "actions-playground/master"
+    if: github.event_name == 'push'
     steps:
       - name:
-        run: echo "${{ toJSON(github) }}"
+        run: echo "this job is only executed when pushing"
