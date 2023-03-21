@@ -12,5 +12,6 @@ jobs:
         env:
           STEP_LEVEL_VARIABLE: It's about variables
         run: echo "${{ env.WORKFLOW_LEVEL_VARIABLE }} ${{ env.JOB_LEVEL_VARIABLE}}. ${{ env.STEP_LEVEL_VARIABLE }}"
-      - name: Second step
-        run: echo "${{ vars.REPOSITORY_VARIABLE }}"
+      # The following will only work if there is a repository variable with the name REPOSITORY_VARIABLE
+      #- name: Second step
+      #  run: echo "${{ vars.REPOSITORY_VARIABLE }}"
