@@ -28,6 +28,7 @@ jobs:
         run: echo "All previous jobs have suceeded"
   job_always:
     if: ${{ always() }}
+    runs-on: ubuntu-latest
     steps:
-      - name:
+      - name: Always
         run: echo "This is always printed"
