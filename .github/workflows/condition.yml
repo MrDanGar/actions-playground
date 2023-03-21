@@ -17,12 +17,13 @@ jobs:
         run: echo "SUCCESS"
   job_cleanup:
     runs-on: ubuntu-latest
+    needs: job_one
     steps:
       - name: Cleanup failure
-        if: ${{ jobs.job_one.steps.critical_step_id.conclusion == 'failure' }}
+        if: ${{ needs.job_one.steps.critical_step_id.conclusion == 'failure' }}
         run: echo "The other job failed"
       - name: Cleanup success
-        if: ${{ jobs.job_one.steps.critical_step_id.conclusion == 'success' }}
+        if: ${{ needs.job_one.steps.critical_step_id.conclusion == 'success' }}
         run: echo "The other job suceeded"
       - name: Clenaup always
         if: ${{ always }}
