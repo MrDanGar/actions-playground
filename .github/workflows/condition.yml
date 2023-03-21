@@ -1,9 +1,9 @@
 name: Conditions
 on: push
-continue-on-error: true
 jobs:
   job_one:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Failing step
         id: failing_step_id
