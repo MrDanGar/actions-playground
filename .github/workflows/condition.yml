@@ -4,7 +4,6 @@ jobs:
   job_one:
     runs-on: ubuntu-latest
     continue-on-error: true
-    id: job_one
     steps:
       - name: Critical step
         id: critical_step_id
@@ -26,5 +25,5 @@ jobs:
         if: ${{ needs.job_one.steps.critical_step_id.conclusion == 'success' }}
         run: echo "The other job suceeded"
       - name: Clenaup always
-        if: ${{ always }}
+        if: ${{ always() }}
         run: echo "This is always echoed"
