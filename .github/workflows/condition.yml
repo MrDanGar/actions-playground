@@ -1,6 +1,6 @@
 name: Conditions
 on: push
-continue-on-error: 'true'
+continue-on-error: true
 jobs:
   job_one:
     runs-on: ubuntu-latest
@@ -9,10 +9,10 @@ jobs:
         id: failing_step_id
         run: exit 1
       - name: On failure step
-        if: ${{ faliure() && steps.failing_step_id.conclusion == 'failure' }}
+        if: ${{ failure() && steps.failing_step_id.conclusion == 'failure' }}
         run: echo "ERROR"
       - name: On success step
-        if: ${{ faliure() && steps.failing_step_id.conclusion == 'failure' }}
+        if: ${{ failure() && steps.failing_step_id.conclusion == 'failure' }}
         run: echo "SUCCESS"
   job_failure:
     if: ${{ failure() }} 
