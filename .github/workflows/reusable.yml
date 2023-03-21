@@ -1,8 +1,24 @@
 name: Reusable workflow
-on: workflow_call
+on: 
+  workflow_call
+    inputs:
+      some_input:
+        description: This is some input
+        required: false
+        default: DEFAULT VALUE
+        type: string
+    outputs:
+      some_output:
+        description: This is some output
+        value: ${{ jobs.Reusable.outputs.job_output }}
 jobs:
   Reuseable:
     runs-on: ubuntu-latest
+    outputs:
+      job_output: ${{ steps.set_result.outputs.step_output }}
     steps:
-      - name: Reusable
-        run: echo "Output from reusable workflow"
+      - name: Output the input
+        run: echo "From reusable workflow -> ${{ inputs.some_input }}"
+      - name: Set output
+        id: set_result
+        run: echo "step_output=Some output from the reusable workflow" >> $GITHUB_OUTPUT

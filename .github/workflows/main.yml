@@ -1,5 +1,13 @@
 name: Call workflow
 on: push
 jobs:
-  Call-another-workflow:
+  Call-workflow:
     uses: ./.github/workflows/reusable.yml
+    with:
+      some_input: La li lu
+  Output-workflow:
+    needs: Call-workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output
+        run: echo "${{ needs.Call-workflow.outputs }}"
