@@ -1,0 +1,8 @@
+name: Call workflow
+on: push
+jobs:
+  Call-another-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call workflow
+        uses: ./.github/workflows/reusable.yml
