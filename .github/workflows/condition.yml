@@ -1,6 +1,6 @@
 name: Conditions
 on: push
-continue-on-error: true
+continue-on-error: 'true'
 jobs:
   job_one:
     runs-on: ubuntu-latest
