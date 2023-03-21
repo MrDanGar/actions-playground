@@ -7,25 +7,13 @@ jobs:
     steps:
       - name: Critical step
         id: critical_step_id
-        run: exit 1
+        run: exit 0
       - name: On failure step
         if: ${{ failure() && steps.critical_step_id.conclusion == 'failure' }}
         run: echo "ERROR"
       - name: On success step
         if: ${{ success() && steps.critical_step_id.conclusion == 'success' }}
         run: echo "SUCCESS"
-  job_cleanup:
-    runs-on: ubuntu-latest
-    needs: job_one
-    steps:
-      - name: test
-        run: echo "${{ toJSON(needs.job_one) }}"
-      - name: Cleanup failure
-        if: ${{ needs.job_one.steps.critical_step_id.conclusion == 'failure' }}
-        run: echo "The other job failed"
-      - name: Cleanup success
-        if: ${{ needs.job_one.steps.critical_step_id.conclusion == 'success' }}
-        run: echo "The other job suceeded"
-      - name: Clenaup always
+      - name: Always
         if: ${{ always() }}
-        run: echo "This is always echoed"
+        run: echo "ALWAYS"
