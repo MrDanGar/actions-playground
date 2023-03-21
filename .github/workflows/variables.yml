@@ -1,0 +1,14 @@
+name: Variables
+on: push
+env:
+  WORKFLOW_LEVEL_VARIABLE: Hello
+jobs:
+  job_one:
+    runs-on: ubuntu-latest
+    env:
+      JOB_LEVEL_VARIABLE: World
+    steps:
+      - name: First step
+        env:
+          STEP_LEVEL_VARIABLE: It's about variables
+        run: echo "${{ WORKFLOW_LEVEL_VARIABLE }} ${{ JOB_LEVEL_VARIABLE }} ${{ STEP_LEVEL_VARIABLE }}"

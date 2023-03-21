@@ -1,0 +1,29 @@
+name: Caching
+on: push
+jobs:
+  job_one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Chache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: project-dependencies
+      - name: Install dependencies
+        run: npm ci
+      # do job_one specific stuff
+  job_two:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Chache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: project-dependencies
+      - name: Install dependencies
+        run: npm ci
+      # do job_two specific stuff
