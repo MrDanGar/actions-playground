@@ -7,6 +7,7 @@ jobs:
     steps:
       - name: Critical step
         id: critical_step_id
+        # for step failing change to: run: exit 1
         run: exit 0
       - name: On failure step
         if: ${{ failure() && steps.critical_step_id.conclusion == 'failure' }}
@@ -17,3 +18,9 @@ jobs:
       - name: Always
         if: ${{ always() }}
         run: echo "ALWAYS"
+  job_two:
+    runs-on: ubuntu-latest
+    #if: github.repository == "actions-playground/master"
+    steps:
+      - name:
+        echo: "${{ toJSON(github) }}"
