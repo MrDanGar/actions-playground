@@ -1,6 +1,6 @@
 name: Reusable workflow
 on: 
-  workflow_call
+  workflow_call:
     inputs:
       some_input:
         description: This is some input
