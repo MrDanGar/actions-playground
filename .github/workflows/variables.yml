@@ -12,3 +12,5 @@ jobs:
         env:
           STEP_LEVEL_VARIABLE: It's about variables
         run: echo "${{ env.WORKFLOW_LEVEL_VARIABLE }} ${{ env.JOB_LEVEL_VARIABLE}}. ${{ env.STEP_LEVEL_VARIABLE }}"
+      - name: Second step
+        run: echo "${{ vars.REPOSITORY_VARIABLE }}"
